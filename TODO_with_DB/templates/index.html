@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO APP</title>
+    <style>
+        p{
+            /* border: 1px solid black; */
+            /* display: inline; */
+            padding: 2px 3px;
+            margin: -5px 0px;
+        }
+        button{
+            margin:8px 110px;
+            width: 150px;
+            height: 28px;
+            background-color: rgb(84, 192, 108);
+            border-color: rgb(134, 211, 151);
+            color: rgb(87, 78, 214);
+            font-weight: bolder;
+            margin-bottom: 18px;
+        }
+
+        a{
+            display: inline;
+            background-color: rgba(94, 94, 206, 0.863);
+            border-radius: 5px;
+            margin: 0px 20px;
+            list-style: none;
+            padding: 4px 23px;
+            color: rgba(34, 30, 30, 0.746);
+            text-decoration: none;
+        }
+
+        #delete{
+            color: rgba(245, 77, 77, 0.76);
+        }
+
+    </style>
+</head>
+<body>
+    <h1>WELCOME TO TODO</h1>
+
+    <form action="/" method="POST">
+        {%csrf_token%}
+        <textarea name="textarea" cols="30" rows="10" style="margin: 0px; width: 369px; height: 65px;"></textarea>
+        <br>
+        <button type="submit">ADD</button>
+
+    </form>
+    
+    <h3>Things to do. you have {{l}} pending tasks todo.</h3>
+
+    {%for task in tasks%}
+    {%if task.completed%}
+            <p>* <strike> {{task}}</strike><a href="{%url 'edit' task.id%}">EDIT</a> <a id='delete' href="{% url 'delete' task.id%}">DELETE</a></p> <br>
+    {%else%}
+    <p>* {{task}}  <a href="{%url 'edit' task.id%}">EDIT</a> <a id='delete' href="{% url 'delete' task.id%}">DELETE</a></p> <br>
+    {%endif%}
+    {%endfor%}
+
+</body>
+</html>

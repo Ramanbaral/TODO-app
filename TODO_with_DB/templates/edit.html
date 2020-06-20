@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDIT TODO'S</title>
+</head>
+<body>
+    This is edit page. id = {{pk}} <br> <br>
+    <span>Previous Task</span>
+    <p>* {{todo_task}}</p>
+
+    <form action="{% url 'edit' todo_task.id%}" method="POST">
+        {%csrf_token%}
+        <label for="newtask">NEW_TASK</label>
+        <input type="text" name="newtask"> 
+        <br> <br>
+        <input type="checkbox" name="status"> COMPLETED
+        <br> <br>
+        <button type="submit">ADD</button>
+    </form>
+
+    {%if status%}
+        <br>
+        <span>You have <strong>completed</strong>  this task.</span>
+    {%else%}
+    <br>
+    <span>You have <strong> not completed</strong> this task.</span>
+    {%endif%}
+    
+</body>
+</html>
